@@ -64,7 +64,7 @@ class _IntroPageState extends State<IntroPage> {
         ],
       ),
       bottomNavigationBar: IntroNextButton(
-        text: currentPageIndex == pages.length - 1 ? "완료" : "다음",
+        questionText: currentPageIndex == pages.length - 1 ? "완료" : "다음",
         // 마지막 페이지에서 "완료"로 변경
         onPressed: () {
           setState(() {

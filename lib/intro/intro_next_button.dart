@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class IntroNextButton extends StatefulWidget {
-  final String text;
+  final String questionText;
   final VoidCallback? onPressed;
 
   const IntroNextButton({
     super.key,
-    required this.text,
+    required this.questionText,
     this.onPressed,
   });
 
@@ -31,7 +31,7 @@ class _IntroNextButtonState extends State<IntroNextButton> {
             ),
           ),
           child: Text(
-            widget.text,
+            widget.questionText,
             style: const TextStyle(
               color: Colors.white, // 글자색을 하얀색으로 설정
               fontSize: 20,
