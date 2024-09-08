@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:medy/intro/w_question_text.dart';
 
-class DiagnosisAgePage extends StatefulWidget {
-  const DiagnosisAgePage({super.key});
+class DiagnosisAge extends StatefulWidget {
+  const DiagnosisAge({super.key});
 
   @override
-  _DiagnosisAgePageState createState() => _DiagnosisAgePageState();
+  _DiagnosisAgeState createState() => _DiagnosisAgeState();
 }
 
-class _DiagnosisAgePageState extends State<DiagnosisAgePage> {
+class _DiagnosisAgeState extends State<DiagnosisAge> {
   final TextEditingController ageController = TextEditingController();
 
   @override

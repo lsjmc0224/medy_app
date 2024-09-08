@@ -4,14 +4,14 @@ import 'package:medy/intro/w_question_text.dart';
 const assetImagePath = 'assets/images';
 const logoImage = '$assetImagePath/logo.png';
 
-class BirthDatePage extends StatefulWidget {
-  const BirthDatePage({super.key});
+class BirthDate extends StatefulWidget {
+  const BirthDate({super.key});
 
   @override
-  _BirthDatePageState createState() => _BirthDatePageState();
+  _BirthDateState createState() => _BirthDateState();
 }
 
-class _BirthDatePageState extends State<BirthDatePage> {
+class _BirthDateState extends State<BirthDate> {
   final TextEditingController yearController = TextEditingController();
   final TextEditingController monthController = TextEditingController();
   final TextEditingController dayController = TextEditingController();

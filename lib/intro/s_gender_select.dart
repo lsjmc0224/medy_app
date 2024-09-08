@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:medy/intro/w_intro_next_button.dart';
 import 'package:medy/intro/w_question_text.dart';
-import 'package:medy/intro/residence_area.dart';
+import 'package:medy/intro/s_residence_area.dart';
 
-class GenderSelectionPage extends StatefulWidget {
-  const GenderSelectionPage({super.key});
+class GenderSelection extends StatefulWidget {
+  const GenderSelection({super.key});
 
   @override
-  _GenderSelectionPageState createState() => _GenderSelectionPageState();
+  _GenderSelectionState createState() => _GenderSelectionState();
 }
 
-class _GenderSelectionPageState extends State<GenderSelectionPage> {
+class _GenderSelectionState extends State<GenderSelection> {
   String? selectedGender;
 
   @override

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:medy/intro/w_question_text.dart';
 
-class ResidenceAreaPage extends StatefulWidget {
-  const ResidenceAreaPage({super.key});
+class ResidenceArea extends StatefulWidget {
+  const ResidenceArea({super.key});
 
   @override
-  State<ResidenceAreaPage> createState() => _ResidenceAreaPageState();
+  State<ResidenceArea> createState() => _ResidenceAreaState();
 }
 
-class _ResidenceAreaPageState extends State<ResidenceAreaPage> {
+class _ResidenceAreaState extends State<ResidenceArea> {
   final TextEditingController resAreaController = TextEditingController();
 
   @override
