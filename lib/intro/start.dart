@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medy/intro/question_text.dart';
+import 'package:medy/intro/w_question_text.dart';
 
 class IntroStart extends StatelessWidget {
   const IntroStart({super.key});

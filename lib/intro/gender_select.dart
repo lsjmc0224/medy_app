@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medy/intro/w_intro_next_button.dart';
-import 'package:medy/intro/question_text.dart';
+import 'package:medy/intro/w_question_text.dart';
 import 'package:medy/intro/residence_area.dart';
 
 class GenderSelectionPage extends StatefulWidget {
