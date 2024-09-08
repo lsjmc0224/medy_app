@@ -15,12 +15,9 @@ class QuestionText extends StatefulWidget {
 class _QuestionTextState extends State<QuestionText> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Text(
-        widget.text,
-        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
+    return Text(
+      widget.text,
+      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
     );
   }
 }

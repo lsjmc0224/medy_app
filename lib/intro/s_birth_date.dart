@@ -18,26 +18,23 @@ class _BirthDateState extends State<BirthDate> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 16),
-        const QuestionText(text: "생년월일이 어떻게 되시나요?"),
-        const SizedBox(height: 20),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Text(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 16),
+          const QuestionText(text: "생년월일이 어떻게 되시나요?"),
+          const SizedBox(height: 20),
+          const Text(
             "외부에 공개되지 않아요",
             style: TextStyle(
               fontSize: 20,
               color: Color(0xff888888),
             ),
           ),
-        ),
-        const SizedBox(height: 82),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
+          const SizedBox(height: 82),
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
@@ -74,8 +71,8 @@ class _BirthDateState extends State<BirthDate> {
               ),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

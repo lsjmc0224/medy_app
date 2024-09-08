@@ -20,7 +20,7 @@ class _FavoriteHospitalState extends State<FavoriteHospital> {
         children: [
           const SizedBox(height: 16),
           const QuestionText(text: "주로 약을 처방받는 병원은\n어느 병원인가요?"),
-          Text(
+          const Text(
             "어떠한 금전적 지원도 받지 않았어요",
             style: TextStyle(
               fontSize: 20,

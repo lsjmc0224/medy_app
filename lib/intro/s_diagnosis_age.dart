@@ -19,26 +19,23 @@ class _DiagnosisAgeState extends State<DiagnosisAge> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 16),
-          const QuestionText(text: "몇 년도에 혈우병을 진단받았나요?"),
-          const SizedBox(height: 20),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 16),
+            const QuestionText(text: "몇 년도에 혈우병을 진단받았나요?"),
+            const SizedBox(height: 20),
+            Text(
               "외부에 공개되지 않아요",
               style: TextStyle(
                 fontSize: 20,
                 color: Color(0xff888888),
               ),
             ),
-          ),
-          const SizedBox(height: 82),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: TextFormField(
+            const SizedBox(height: 82),
+            TextFormField(
               controller: ageController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
@@ -46,8 +43,8 @@ class _DiagnosisAgeState extends State<DiagnosisAge> {
                 border: OutlineInputBorder(),
               ),
             ),
-          ),
-        ],
-      );
+          ],
+        ),
+    );
   }
 }
