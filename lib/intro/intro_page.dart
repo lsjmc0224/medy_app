@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medy/intro/birth_date_page.dart';
 import 'package:medy/intro/diagnosis_age_page.dart';
 import 'package:medy/intro/gender_select.dart';
-import 'package:medy/intro/intro_next_button.dart';
+import 'package:medy/intro/w_intro_next_button.dart';
 import 'package:medy/intro/residence_area.dart';
 import 'package:medy/intro/start.dart';
 

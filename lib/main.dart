@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medy/intro/birth_date_page.dart';
-import 'package:medy/intro/intro_next_button.dart';
+import 'package:medy/intro/w_intro_next_button.dart';
 import 'package:medy/intro/intro_page.dart';
 
 const assetImagePath = 'assets/images';

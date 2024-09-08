@@ -58,11 +58,14 @@ class _ResidenceAreaPageState extends State<ResidenceAreaPage> {
             ),
           ),
           // 검색 결과가 나오는 영역
-          Container(
-            // TODO: 검색결과 받아서 필터링 ( default 값은 가나다 순으로 )
-            color: Colors.yellow, // 이곳에 실제 UI 요소를 넣을 수 있습니다.
-            child: const Center(child: Text("검색결과 표시 영역")),
+          Expanded(
+            child: Container(
+              // TODO: 검색결과 받아서 필터링 ( default 값은 가나다 순으로 )
+              color: Colors.yellow, // 이곳에 실제 UI 요소를 넣을 수 있습니다.
+              child: const Center(child: Text("검색결과 표시 영역")),
+            ),
           ),
+          Container(height: 50,)
         ],
       ),
     );
