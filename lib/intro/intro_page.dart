@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medy/intro/s_birth_date.dart';
 import 'package:medy/intro/s_diagnosis_age.dart';
+import 'package:medy/intro/s_fav_hospital.dart';
 import 'package:medy/intro/s_gender_select.dart';
 import 'package:medy/intro/w_intro_next_button.dart';
 import 'package:medy/intro/s_residence_area.dart';
@@ -15,6 +16,7 @@ const List<Widget> questionList = [
   DiagnosisAge(),
   GenderSelection(),
   ResidenceArea(),
+  FavoriteHospital(),
 ];
 
 class IntroPage extends StatefulWidget {

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medy/intro/s_birth_date.dart';
-import 'package:medy/intro/w_intro_next_button.dart';
 import 'package:medy/intro/intro_page.dart';
 
 const assetImagePath = 'assets/images';
@@ -22,7 +20,7 @@ class MedyApp extends StatelessWidget {
             secondary: Colors.white,
             tertiary: Colors.grey),
       ),
-      home: const MedyIntro(),
+      home: const IntroPage(),
     );
   }
 }
