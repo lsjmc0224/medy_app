@@ -1,52 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:medy/intro/w_question_text.dart';
 
-class GenderSelection extends StatefulWidget {
-  const GenderSelection({super.key});
+class TripFrequency extends StatefulWidget {
+  const TripFrequency({super.key});
 
   @override
-  State<GenderSelection> createState() => _GenderSelectionState();
+  State<TripFrequency> createState() => _TripFrequencyState();
 }
 
-class _GenderSelectionState extends State<GenderSelection> {
-  String? selectedGender;
+class _TripFrequencyState extends State<TripFrequency> {
+  String? selectedFrequency;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // 진도 표시 바
-            const SizedBox(height: 16),
-            const QuestionText(text: "성별이 어떻게 되시나요?"),
-            const SizedBox(height: 20),
-            const Text(
-              "외부에 공개되지 않아요",
-              style: TextStyle(
-                fontSize: 20,
-                color: Color(0xff888888),
-              ),
-            ),
-            const Expanded(child: SizedBox()),
-            _buildGenderOption("남성"),
-            const SizedBox(height: 10),
-            _buildGenderOption("여성"),
-            const SizedBox(height: 10),
-            _buildGenderOption("기타"),
-          ],
-        ),
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 16),
+          const QuestionText(text: "장거리 여행을\n얼마나 자주 다니시나요?"),
+          const Expanded(
+            child: SizedBox(),
+          ),
+          _buildFrequencyOption("1~2주에 1번"),
+          const SizedBox(height: 10),
+          _buildFrequencyOption("1~2달에 1번"),
+          const SizedBox(height: 10),
+          _buildFrequencyOption("6개월에 1번 이하"),
+        ],
+      ),
     );
   }
 
-  Widget _buildGenderOption(String gender) {
-    bool isSelected = selectedGender == gender;
+  Widget _buildFrequencyOption(String frequency) {
+    bool isSelected = selectedFrequency == frequency;
 
     return GestureDetector(
       onTap: () {
         setState(() {
-          selectedGender = gender;
+          selectedFrequency = frequency;
         });
       },
       child: Container(
@@ -61,11 +54,11 @@ class _GenderSelectionState extends State<GenderSelection> {
         child: Row(
           children: [
             Radio<String>(
-              value: gender,
-              groupValue: selectedGender,
+              value: frequency,
+              groupValue: selectedFrequency,
               onChanged: (String? value) {
                 setState(() {
-                  selectedGender = value;
+                  selectedFrequency = value;
                 });
               },
               activeColor: Colors.white,
@@ -78,7 +71,7 @@ class _GenderSelectionState extends State<GenderSelection> {
             ),
             const SizedBox(width: 8),
             Text(
-              gender,
+              frequency,
               style: TextStyle(
                 color: isSelected ? Colors.white : Colors.black,
                 fontSize: 20,

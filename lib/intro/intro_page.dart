@@ -3,6 +3,7 @@ import 'package:medy/intro/s_birth_date.dart';
 import 'package:medy/intro/s_diagnosis_age.dart';
 import 'package:medy/intro/s_fav_hospital.dart';
 import 'package:medy/intro/s_gender_select.dart';
+import 'package:medy/intro/s_trip_freq.dart';
 import 'package:medy/intro/w_intro_next_button.dart';
 import 'package:medy/intro/s_residence_area.dart';
 import 'package:medy/intro/s_start.dart';
@@ -17,6 +18,7 @@ const List<Widget> questionList = [
   GenderSelection(),
   ResidenceArea(),
   FavoriteHospital(),
+  TripFrequency(),
 ];
 
 class IntroPage extends StatefulWidget {
