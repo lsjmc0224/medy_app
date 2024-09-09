@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:medy/intro/s_birth_date.dart';
 import 'package:medy/intro/s_diagnosis_age.dart';
+import 'package:medy/intro/s_family_history.dart';
 import 'package:medy/intro/s_fav_hospital.dart';
 import 'package:medy/intro/s_gender_select.dart';
+import 'package:medy/intro/s_hemophilia_type.dart';
+import 'package:medy/intro/s_patient_or_guardian.dart';
+import 'package:medy/intro/s_self_injection.dart';
+import 'package:medy/intro/s_serverity_level.dart';
 import 'package:medy/intro/s_surgery_experience.dart';
 import 'package:medy/intro/s_trip_freq.dart';
 import 'package:medy/intro/w_intro_next_button.dart';
@@ -21,7 +26,11 @@ const List<Widget> questionList = [
   FavoriteHospital(),
   TripFrequency(),
   SurgeryExperience(),
-
+  HemophiliaType(),
+  SeverityLevel(),
+  FamilyHistory(),
+  SelfInjection(),
+  PatientOrGuardian(),
 ];
 
 class IntroPage extends StatefulWidget {

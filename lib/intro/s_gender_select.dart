@@ -1,91 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:medy/intro/w_option_selector.dart';
 import 'package:medy/intro/w_question_text.dart';
 
-class GenderSelection extends StatefulWidget {
+class GenderSelection extends StatelessWidget {
   const GenderSelection({super.key});
-
-  @override
-  State<GenderSelection> createState() => _GenderSelectionState();
-}
-
-class _GenderSelectionState extends State<GenderSelection> {
-  String? selectedGender;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // 진도 표시 바
-            const SizedBox(height: 16),
-            const QuestionText(text: "성별이 어떻게 되시나요?"),
-            const SizedBox(height: 20),
-            const Text(
-              "외부에 공개되지 않아요",
-              style: TextStyle(
-                fontSize: 20,
-                color: Color(0xff888888),
-              ),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 16),
+          const QuestionText(text: "성별이 어떻게 되시나요?"),
+          const SizedBox(height: 20),
+          const Text(
+            "외부에 공개되지 않아요",
+            style: TextStyle(
+              fontSize: 20,
+              color: Color(0xff888888),
             ),
-            const Expanded(child: SizedBox()),
-            _buildGenderOption("남성"),
-            const SizedBox(height: 10),
-            _buildGenderOption("여성"),
-            const SizedBox(height: 10),
-            _buildGenderOption("기타"),
-          ],
-        ),
-    );
-  }
-
-  Widget _buildGenderOption(String gender) {
-    bool isSelected = selectedGender == gender;
-
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedGender = gender;
-        });
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF3888FF) : Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: isSelected ? const Color(0xFF3888FF) : Colors.grey,
           ),
-        ),
-        child: Row(
-          children: [
-            Radio<String>(
-              value: gender,
-              groupValue: selectedGender,
-              onChanged: (String? value) {
-                setState(() {
-                  selectedGender = value;
-                });
-              },
-              activeColor: Colors.white,
-              fillColor: WidgetStateProperty.resolveWith<Color>((states) {
-                if (states.contains(WidgetState.selected)) {
-                  return Colors.white;
-                }
-                return const Color(0xFF3888FF);
-              }),
-            ),
-            const SizedBox(width: 8),
-            Text(
-              gender,
-              style: TextStyle(
-                color: isSelected ? Colors.white : Colors.black,
-                fontSize: 20,
-              ),
-            ),
-          ],
-        ),
+          const Expanded(child: SizedBox()),
+          OptionSelector(
+            options: const ["남성", "여성", "기타"],
+            onSelected: (option) {
+              // 선택된 옵션 처리
+              print("Selected gender: $option");
+            },
+          ),
+        ],
       ),
     );
   }
