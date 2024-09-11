@@ -29,17 +29,17 @@ class MainCalendar extends StatelessWidget {
         leftChevronVisible: false,
         rightChevronVisible: false,
       ),
-      calendarStyle: CalendarStyle(
-        todayDecoration: const BoxDecoration(
+      calendarStyle: const CalendarStyle(
+        todayDecoration: BoxDecoration(
           color: Color(0xFFCCCCCC),
           shape: BoxShape.circle,
         ),
-        selectedDecoration: const BoxDecoration(
+        selectedDecoration: BoxDecoration(
           color: Colors.blue,
           shape: BoxShape.circle,
         ),
         outsideDaysVisible: false,
-        disabledTextStyle: const TextStyle(color: Colors.grey),
+        disabledTextStyle: TextStyle(color: Colors.grey),
       ),
       enabledDayPredicate: (day) => day.month == now.month && day.isAfter(now.subtract(const Duration(days: 1))),
     );
