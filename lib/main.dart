@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medy/intro/intro_page.dart';
+import 'package:medy/main/s_main_page.dart';
 
 const assetImagePath = 'assets/images';
 const logoImage = '$assetImagePath/logo.png';
@@ -20,7 +21,7 @@ class MedyApp extends StatelessWidget {
             secondary: Colors.white,
             tertiary: Colors.grey),
       ),
-      home: const IntroPage(),
+      home: const MainPage(),
     );
   }
 }
