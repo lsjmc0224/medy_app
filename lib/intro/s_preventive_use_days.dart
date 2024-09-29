@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medy/intro/w_main_calendar.dart';
+import 'package:medy/intro/w_intro_calendar.dart';
 import 'package:medy/intro/w_question_text.dart';
 
 class PreventiveUseDays extends StatefulWidget {
@@ -31,7 +31,7 @@ class _PreventiveUseDaysState extends State<PreventiveUseDays> {
           ),
           Expanded(
             child: Center(
-              child: MainCalendar(
+              child: IntroCalendar(
                 selectedDates: selectedDates,
                 onDaySelected: (selectedDay, focusedDay) {
                   updateSelectedDates(selectedDates, selectedDay, (newDates) {

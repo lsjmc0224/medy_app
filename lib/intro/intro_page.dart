@@ -34,8 +34,8 @@ const List<Widget> questionList = [
   FamilyHistory(),
   SelfInjection(),
   PatientOrGuardian(),
-  PreventiveUseDays(),
-  AlarmTimeSetting(),
+  // PreventiveUseDays(),
+  // AlarmTimeSetting(),
   UserFunnel(),
 ];
 
@@ -47,29 +47,29 @@ class IntroPage extends StatefulWidget {
 }
 
 class _IntroPageState extends State<IntroPage> {
-  int currentPageIndex = 0; // 현재 페이지의 인덱스를 추적
+  int currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true, // title을 AppBar의 중앙에 위치
+        centerTitle: true,
         title: Image.asset(
           logoImage,
           height: 24,
         ),
-        leading: currentPageIndex > 0 // 이전 버튼 추가
+        leading: currentPageIndex > 0
             ? IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  setState(() {
-                    if (currentPageIndex > 0) {
-                      currentPageIndex--;
-                    }
-                  });
-                },
-              )
-            : null, // 첫 번째 페이지에서는 '이전' 버튼을 숨김
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            setState(() {
+              if (currentPageIndex > 0) {
+                currentPageIndex--;
+              }
+            });
+          },
+        )
+            : null,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,22 +78,23 @@ class _IntroPageState extends State<IntroPage> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: LinearProgressIndicator(
               value: (currentPageIndex + 1) / questionList.length,
-              // 진도 표시를 위한 값 (0.0 ~ 1.0)
               backgroundColor: Colors.grey[300],
             ),
           ),
-          Expanded(child: questionList[currentPageIndex]), // 현재 인덱스의 페이지를 표시
+          Expanded(child: questionList[currentPageIndex]),
         ],
       ),
       bottomNavigationBar: IntroNextButton(
         questionText: currentPageIndex == questionList.length - 1 ? "완료" : "다음",
-        // 마지막 페이지에서 "완료"로 변경
         onPressed: () {
-          setState(() {
-            if (currentPageIndex < questionList.length - 1) {
-              currentPageIndex++; // 다음 페이지로 이동
-            }
-          });
+          if (currentPageIndex < questionList.length - 1) {
+            setState(() {
+              currentPageIndex++;
+            });
+          } else {
+            // 완료 버튼을 눌렀을 때 /mainScreen으로 이동
+            Navigator.pushReplacementNamed(context, '/mainScreen');
+          }
         },
       ),
     );

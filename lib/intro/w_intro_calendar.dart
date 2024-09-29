@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class MainCalendar extends StatelessWidget {
+class IntroCalendar extends StatelessWidget {
   final Function(DateTime selectedDay, DateTime focusedDay) onDaySelected;
   final Set<DateTime> selectedDates;
 
-  const MainCalendar({
+  const IntroCalendar({
     super.key,
     required this.onDaySelected,
     required this.selectedDates,
