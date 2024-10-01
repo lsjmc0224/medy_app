@@ -1,4 +1,4 @@
-import 'package:medy/home/vo/company.dart';
+import 'package:medy/data/vo/company.dart';
 
 class Medicine{
   final int id;

@@ -1,5 +1,5 @@
-import 'package:medy/home/medicine_dummy.dart';
-import 'package:medy/home/vo/user.dart';
+import 'package:medy/data/medicine_dummy.dart';
+import 'package:medy/data/vo/user.dart';
 
 final testUser1 = User(
   id: 1,

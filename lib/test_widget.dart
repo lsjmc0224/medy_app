@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:medy/main/w_calendar.dart';
-
-// Import your widgets here
-// import 'package:medy/widgets/main_calendar.dart';
+import 'package:medy/widget/w_calendar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

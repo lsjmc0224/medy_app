@@ -1,4 +1,4 @@
-import 'package:medy/home/vo/hospital.dart';
+import 'package:medy/data/vo/hospital.dart';
 
 final Hospital1 = Hospital(
   id: 1,
