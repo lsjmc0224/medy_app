@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medy/data/user_dummy.dart';
 import '../navigation/bottom_navigation.dart';
 import '../screen/s_home_page.dart';
 import '../screen/s_map_page.dart';
@@ -77,7 +78,7 @@ class _MainPageState extends State<MainPage> {
       case TabItem.map:
         return const MapPage(); // 지도 페이지 위젯 사용
       case TabItem.mypage:
-        return const MyPage(); // 마이 페이지 위젯 사용
+        return MyPage(user: testUser2,); // 마이 페이지 위젯 사용
     }
   }
 
