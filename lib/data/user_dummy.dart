@@ -7,6 +7,7 @@ final testUser1 = User(
   sex: 'male',
   address: '경기도 광주시 오포읍',
   isPatient: false,
+  birthdate: '1988-03-25',
 );
 final testUser2 = User(
   id: 2,
@@ -15,4 +16,5 @@ final testUser2 = User(
   address: '경기도 광주시 신현리',
   isPatient: true,
   medicine: Medicine1,
+  birthdate: '1992-06-15'
 );
