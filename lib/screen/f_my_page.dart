@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:medy/data/user_dummy.dart';
 import 'package:medy/data/vo/medicine.dart';
 import 'package:medy/data/vo/user.dart';
+import 'package:medy/screen/s_edit_my_info.dart';
 
-class MyPage extends StatelessWidget {
-  final User user;
+class MyPageFragment extends StatelessWidget {
 
-  const MyPage({super.key, required this.user});
+  const MyPageFragment({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +27,9 @@ class MyPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ProfileSection(user: user), // 전달된 유저 데이터 사용
+                    ProfileSection(user: testUser2), // 전달된 유저 데이터 사용
                     const DividerWidget(),
-                    MyMedicationSection(user: user), // 전달된 유저 데이터 사용
+                    MyMedicationSection(user: testUser2), // 전달된 유저 데이터 사용
                     const DividerWidget(),
                     const CustomerSupportSection(),
                   ],
@@ -49,46 +50,51 @@ class ProfileSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '${user.nickname} 님', // 유저의 닉네임 표시
-                    style: const TextStyle(
-                      fontSize: 24,
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${user.nickname} 님', // 유저의 닉네임 표시
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // EditMyInfo 페이지로 이동
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditMyInfoScreen(user: user),
+                      ),
+                    );
+                  },
+
+                  child: const Text(
+                    '정보 수정',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Color(0xffcccccc),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      // 정보 수정 클릭 시 동작을 여기에 작성
-                    },
-                    child: const Text(
-                      '정보 수정',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xffcccccc),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            CircleAvatar(
-              radius: 30,
-              backgroundImage: NetworkImage(
-                'https://via.placeholder.com/150',
-              ),
+          ),
+          const CircleAvatar(
+            radius: 30,
+            backgroundImage: NetworkImage(
+              'https://via.placeholder.com/150',
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -109,7 +115,9 @@ class DividerWidget extends StatelessWidget {
 
 // 처방약 및 루틴 섹션 위젯
 class PrescriptionRoutineSection extends StatelessWidget {
-  const PrescriptionRoutineSection({super.key});
+  final User user;
+
+  const PrescriptionRoutineSection({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +133,15 @@ class PrescriptionRoutineSection extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            // 정보 수정 클릭 시 동작을 여기에 작성
+            // EditMyInfo 페이지로 이동
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EditMyInfoScreen(user: user),
+                fullscreenDialog: true,
+
+              ),
+            );
           },
           child: const Text(
             '정보 수정',
@@ -135,7 +151,8 @@ class PrescriptionRoutineSection extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-        ),      ],
+        ),
+      ],
     );
   }
 }
@@ -173,7 +190,7 @@ class MedicationBox extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Row(
         children: [
-          CircleAvatar(
+          const CircleAvatar(
             radius: 40,
             backgroundImage: NetworkImage(
               'https://via.placeholder.com/150',
@@ -216,7 +233,6 @@ class MedicationBox extends StatelessWidget {
   }
 }
 
-
 // 처방약 및 루틴과 약 정보 박스 섹션 위젯
 class MyMedicationSection extends StatelessWidget {
   final User user;
@@ -230,9 +246,12 @@ class MyMedicationSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const PrescriptionRoutineSection(),
+          PrescriptionRoutineSection(
+            user: user,
+          ),
           const SizedBox(height: 16),
-          if (user.isPatient && user.medicine != null) // 유저가 환자이고 약 정보가 있을 때만 표시
+          if (user.isPatient &&
+              user.medicine != null) // 유저가 환자이고 약 정보가 있을 때만 표시
             MedicationBox(medicine: user.medicine!),
         ],
       ),
@@ -246,32 +265,32 @@ class CustomerSupportSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
+    return const Padding(
+      padding: EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             '고객 지원',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 16),
-          const CustomerSupportItem(
+          SizedBox(height: 16),
+          CustomerSupportItem(
             icon: Icons.bookmark,
             text: '내 북마크',
           ),
-          const CustomerSupportItem(
+          CustomerSupportItem(
             icon: Icons.description,
             text: '서비스 이용약관',
           ),
-          const CustomerSupportItem(
+          CustomerSupportItem(
             icon: Icons.lock,
             text: '개인정보 처리방침',
           ),
-          const CustomerSupportItem(
+          CustomerSupportItem(
             icon: Icons.settings,
             text: '내 계정 관리하기',
           ),

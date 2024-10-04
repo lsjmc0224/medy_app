@@ -7,11 +7,11 @@ class LastMedDay extends StatefulWidget {
   final VoidCallback? onTap;
 
   const LastMedDay({
-    Key? key,
+    super.key,
     required this.medName,
     this.medDay,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   _LastMedDayState createState() => _LastMedDayState();
@@ -52,14 +52,14 @@ class _LastMedDayState extends State<LastMedDay> {
         width: double.infinity,
         height: 80,
         decoration: BoxDecoration(
-          color: _isSelected ? Color(0xff3888ff) : Colors.white,
+          color: _isSelected ? const Color(0xff3888ff) : Colors.white,
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.25),
               spreadRadius: 3,
               blurRadius: 5,
-              offset: Offset(0, 0),
+              offset: const Offset(0, 0),
             ),
           ],
         ),
@@ -92,7 +92,7 @@ class _LastMedDayState extends State<LastMedDay> {
               ),
               Icon(
                 Icons.check_circle,
-                color: _isSelected ? Colors.white : Color(0xff3888ff),
+                color: _isSelected ? Colors.white : const Color(0xff3888ff),
                 size: 40,
               ),
             ],

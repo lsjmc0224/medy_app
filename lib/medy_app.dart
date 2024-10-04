@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medy/intro/intro_page.dart';
 import 'package:medy/screen/s_main_page.dart';
 
 class MedyApp extends StatelessWidget {
@@ -15,12 +14,7 @@ class MedyApp extends StatelessWidget {
             tertiary: Colors.grey),
       ),
       title: 'Medy',
-      initialRoute: '/',
-      routes: {
-        '/': (BuildContext context) => IntroPage(),
-        '/mainScreen': (_) => MainPage(),
-      },
-      // home: const MainPage(),
+      home: const MainScreen(),
     );
   }
 }

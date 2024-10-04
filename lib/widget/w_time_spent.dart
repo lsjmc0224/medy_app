@@ -4,7 +4,7 @@ import 'dart:async';
 class TimeSpent extends StatefulWidget {
   final DateTime lastMedTime;
 
-  const TimeSpent({Key? key, required this.lastMedTime}) : super(key: key);
+  const TimeSpent({super.key, required this.lastMedTime});
 
   @override
   State<TimeSpent> createState() => _TimeSpentState();
@@ -18,7 +18,7 @@ class _TimeSpentState extends State<TimeSpent> {
   void initState() {
     super.initState();
     _updateTimeSpent();
-    _timer = Timer.periodic(Duration(minutes: 1), (timer) {
+    _timer = Timer.periodic(const Duration(minutes: 1), (timer) {
       _updateTimeSpent();
     });
   }
@@ -57,7 +57,7 @@ class _TimeSpentState extends State<TimeSpent> {
             color: Colors.black.withOpacity(0.25),
             spreadRadius: 3,
             blurRadius: 5,
-            offset: Offset(0, 0),
+            offset: const Offset(0, 0),
           ),
         ],
       ),
@@ -67,7 +67,7 @@ class _TimeSpentState extends State<TimeSpent> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "마지막 투여로부터...",
               style: TextStyle(
                 fontSize: 16,
@@ -76,7 +76,7 @@ class _TimeSpentState extends State<TimeSpent> {
             ),
             Text(
               _timeSpentText,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,

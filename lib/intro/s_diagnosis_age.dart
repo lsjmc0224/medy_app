@@ -27,7 +27,7 @@ class _DiagnosisAgeState extends State<DiagnosisAge> {
             const SizedBox(height: 16),
             const QuestionText(text: "몇 년도에 혈우병을 진단받았나요?"),
             const SizedBox(height: 20),
-            Text(
+            const Text(
               "외부에 공개되지 않아요",
               style: TextStyle(
                 fontSize: 20,

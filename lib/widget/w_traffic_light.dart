@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class TrafficLight extends StatelessWidget {
   final DateTime lastMedTime;
 
-  TrafficLight({required this.lastMedTime});
+  const TrafficLight({super.key, required this.lastMedTime});
 
   @override
   Widget build(BuildContext context) {
     final Duration timeSpent = DateTime.now().difference(lastMedTime);
 
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.black,
         borderRadius: BorderRadius.circular(24),
@@ -29,7 +29,7 @@ class TrafficLight extends StatelessWidget {
 
   Widget _buildLight(Color lightColor, Color thisColor) {
     return Container(
-      margin: EdgeInsets.all(6.0),
+      margin: const EdgeInsets.all(6.0),
       width: 36,
       height: 36,
       decoration: BoxDecoration(

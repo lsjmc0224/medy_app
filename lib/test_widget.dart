@@ -10,7 +10,7 @@ void main() async {
 }
 
 class TestWidgetApp extends StatelessWidget {
-  const TestWidgetApp({Key? key}) : super(key: key);
+  const TestWidgetApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class TestWidgetApp extends StatelessWidget {
 }
 
 class TestWidgetScreen extends StatelessWidget {
-  const TestWidgetScreen({Key? key}) : super(key: key);
+  const TestWidgetScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

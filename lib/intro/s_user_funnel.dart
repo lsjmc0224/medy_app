@@ -91,7 +91,7 @@ class UserFunnel extends StatelessWidget {
           SizedBox(height: 16),
           QuestionText(text: "Medy를 어떻게 알게 되셨나요?"),
           SizedBox(height: 16),
-          const Text(
+          Text(
             "중복선택이 가능해요",
             style: TextStyle(
               fontSize: 20,

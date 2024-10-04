@@ -5,14 +5,14 @@ import '../widget/w_last_med_day.dart';
 import '../widget/w_time_spent.dart';
 import '../widget/w_traffic_light.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeFragment extends StatefulWidget {
+  const HomeFragment({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeFragment> createState() => _HomeFragmentState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeFragmentState extends State<HomeFragment> {
   late DateTime lastMedTime;
   late List<DateTime> allMedDates;
 
@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _fetchData() async {
-    await Future.delayed(const Duration(seconds: 1)); // API 호출 시뮬레이션
     setState(() {
       lastMedTime = DateTime.now().subtract(const Duration(hours: 3, minutes: 30));
       allMedDates = List.generate(10, (index) => DateTime.now().subtract(Duration(days: index * 2)));

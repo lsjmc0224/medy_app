@@ -47,10 +47,10 @@ class CustomTimePickerButton extends StatefulWidget {
   final Function(TimeOfDay) onTimeSelected;
 
   const CustomTimePickerButton({
-    Key? key,
+    super.key,
     required this.initialTime,
     required this.onTimeSelected,
-  }) : super(key: key);
+  });
 
   @override
   _CustomTimePickerButtonState createState() => _CustomTimePickerButtonState();
@@ -84,14 +84,14 @@ class _CustomTimePickerButtonState extends State<CustomTimePickerButton> {
         height: 50,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
-          border: Border.all(color: Color(0xffcccccc)),
+          border: Border.all(color: const Color(0xffcccccc)),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Align(
           alignment: Alignment.centerLeft,
           child: Text(
             _formatTime(_selectedTime),
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontSize: 20,
               fontFamily: 'Noto Sans KR',

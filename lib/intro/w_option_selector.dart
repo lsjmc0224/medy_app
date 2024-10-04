@@ -60,8 +60,8 @@ class _OptionSelectorState extends State<OptionSelector> {
                 widget.onSelected(value);
               },
               activeColor: Colors.white,
-              fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-                if (states.contains(MaterialState.selected)) {
+              fillColor: WidgetStateProperty.resolveWith<Color>((states) {
+                if (states.contains(WidgetState.selected)) {
                   return Colors.white;
                 }
                 return const Color(0xFF3888FF);

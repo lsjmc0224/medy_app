@@ -1,85 +1,132 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:medy/data/user_dummy.dart';
-import '../navigation/bottom_navigation.dart';
-import '../screen/s_home_page.dart';
-import '../screen/s_map_page.dart';
-import '../screen/s_my_page.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:medy/main/tab_item.dart';
+import 'package:medy/main/tab_navigator.dart';
+import 'dart:async';
 
-// Enum to represent different tabs
-enum TabItem { home, map, mypage }
-
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainPageState extends State<MainPage> {
-  TabItem _currentTab = TabItem.home; // 현재 활성화된 탭을 저장하는 변수
-  final tabs = [TabItem.home, TabItem.map, TabItem.mypage]; // 모든 탭 리스트
-  final List<GlobalKey<NavigatorState>> navigatorKeys = []; // 각 탭마다 NavigatorState 키를 저장할 리스트
+class _MainScreenState extends State<MainScreen> {
+  TabItem _currentTab = TabItem.home;
+  final tabs = [
+    TabItem.home,
+    TabItem.map,
+    TabItem.mypage,
+  ];
+  final List<GlobalKey<NavigatorState>> navigatorKeys = [];
 
   @override
   void initState() {
     super.initState();
-    initNavigatorKeys(); // Navigator 키 초기화
+    initNavigatorKeys();
   }
 
-  // 각 탭마다 Navigator 키를 초기화하는 메서드
   void initNavigatorKeys() {
     for (final _ in tabs) {
       navigatorKeys.add(GlobalKey<NavigatorState>());
     }
   }
 
-  // 현재 활성화된 탭의 인덱스를 반환하는 getter
   int get _currentIndex => tabs.indexOf(_currentTab);
 
-  // 현재 탭의 NavigatorState 키를 반환하는 getter
-  GlobalKey<NavigatorState> get _currentTabNavigationKey => navigatorKeys[_currentIndex];
+  GlobalKey<NavigatorState> get _currentTabNavigationKey =>
+      navigatorKeys[_currentIndex];
+
+  bool get extendBody => true;
+
+  static double get bottomNavigationBarBorderRadius => 30.0;
+
+  FutureOr<void> afterFirstLayout(BuildContext context) async {
+    FlutterNativeSplash.remove();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildCurrentTabContent(), // 현재 활성화된 탭의 콘텐츠를 표시
-      bottomNavigationBar: BottomNavigation(
-        currentIndex: _currentIndex,
-        onTap: _handleOnTapNavigationBarItem,
+    return WillPopScope(
+      onWillPop: _handleBackPressed,
+      child: Scaffold(
+        extendBody: extendBody,
+        body: Padding(
+          padding: EdgeInsets.only(
+              bottom: extendBody ? 60 - bottomNavigationBarBorderRadius : 0),
+          child: SafeArea(
+            bottom: !extendBody,
+            child: pages,
+          ),
+        ),
+        bottomNavigationBar: _buildBottomNavigationBar(context),
       ),
     );
   }
 
-  Widget _buildCurrentTabContent() {
-    return IndexedStack(
-      index: _currentIndex, // 현재 활성화된 인덱스
-      children: tabs.asMap().entries.map((entry) {
-        int index = entry.key;
-        TabItem tab = entry.value;
-        return Offstage(
-          offstage: _currentTab != tab, // 현재 탭이 아니면 숨김 처리
-          child: Navigator(
-            key: navigatorKeys[index], // 각 탭의 Navigator 키 사용
-            onGenerateRoute: (routeSettings) {
-              return MaterialPageRoute(
-                builder: (context) => _buildPageForTab(tab), // 각 탭에 맞는 페이지 생성
-              );
-            },
-          ),
-        );
-      }).toList(),
+  Future<bool> _handleBackPressed() async {
+    final isFirstRouteInCurrentTab =
+        (await _currentTabNavigationKey.currentState?.maybePop() == false);
+    if (isFirstRouteInCurrentTab) {
+      if (_currentTab != TabItem.home) {
+        _changeTab(tabs.indexOf(TabItem.home));
+        return false;
+      }
+    }
+    // maybePop 가능하면 나가지 않는다.
+    return isFirstRouteInCurrentTab;
+  }
+
+  IndexedStack get pages => IndexedStack(
+      index: _currentIndex,
+      children: tabs
+          .mapIndexed(
+            (index, tab) => Offstage(
+              offstage: _currentTab != tab,
+              child: TabNavigator(
+                navigatorKey: navigatorKeys[index],
+                tabItem: tab,
+              ),
+            ),
+          )
+          .toList());
+
+  Widget _buildBottomNavigationBar(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        boxShadow: [
+          BoxShadow(color: Colors.black26, spreadRadius: 0, blurRadius: 10),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(bottomNavigationBarBorderRadius),
+          topRight: Radius.circular(bottomNavigationBarBorderRadius),
+        ),
+        child: BottomNavigationBar(
+          items: navigationBarItems(context),
+          currentIndex: _currentIndex,
+          selectedItemColor: Theme.of(context).primaryColor,
+          unselectedItemColor: Theme.of(context).disabledColor,
+          onTap: _handleOnTapNavigationBarItem,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          type: BottomNavigationBarType.fixed,
+        ),
+      ),
     );
   }
 
-  Widget _buildPageForTab(TabItem tab) {
-    switch (tab) {
-      case TabItem.home:
-        return const HomePage(); // 홈 페이지 위젯 사용
-      case TabItem.map:
-        return const MapPage(); // 지도 페이지 위젯 사용
-      case TabItem.mypage:
-        return MyPage(user: testUser2,); // 마이 페이지 위젯 사용
-    }
+  List<BottomNavigationBarItem> navigationBarItems(BuildContext context) {
+    return tabs
+        .mapIndexed(
+          (index, tab) => tab.toNavigationBarItem(
+        context,
+        isActivated: _currentIndex == index,
+      ),
+    )
+        .toList();
   }
 
   void _handleOnTapNavigationBarItem(int index) {
@@ -87,19 +134,24 @@ class _MainPageState extends State<MainPage> {
     final targetTab = tabs[index];
     if (oldTab == targetTab) {
       final navigationKey = _currentTabNavigationKey;
-      _popAllHistory(navigationKey); // 동일한 탭을 다시 클릭했을 때 스택을 모두 제거
+      _popAllHistory(navigationKey);
     }
-    setState(() {
-      _currentTab = tabs[index]; // 활성화된 탭 변경
-    });
+    _changeTab(index);
   }
 
   void _popAllHistory(GlobalKey<NavigatorState> navigationKey) {
     final bool canPop = navigationKey.currentState?.canPop() == true;
     if (canPop) {
       while (navigationKey.currentState?.canPop() == true) {
-        navigationKey.currentState!.pop(); // 가능한 모든 네비게이션 pop
+        navigationKey.currentState!.pop();
       }
     }
   }
+
+  void _changeTab(int index) {
+    setState(() {
+      _currentTab = tabs[index];
+    });
+  }
 }
+
