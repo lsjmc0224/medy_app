@@ -5,6 +5,24 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localProperties.load(new FileInputStream(localPropertiesFile))
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+def googleMapKey = localProperties.getProperty('google.map.key')
+if (googleMapKey == null) {
+    throw GradleException("Google Map Key not found.")
+}
+
+apply plugin: 'com.android.application'
+
 android {
     namespace = "com.example.medy"
     compileSdk = flutter.compileSdkVersion
@@ -24,10 +42,11 @@ android {
         applicationId = "com.example.medy"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        minSdk = 20 // 구글 지도 적용을 위해 minSdkVersion을 20이상으로 변경함.
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        manifestPlaceholders = [googleMapKey: googleMapKey, applicationName: "io.flutter.app.FlutterApplication"]
     }
 
     buildTypes {
@@ -42,3 +61,4 @@ android {
 flutter {
     source = "../.."
 }
+
