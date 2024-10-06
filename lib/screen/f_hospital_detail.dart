@@ -15,27 +15,37 @@ class HospitalDetail extends StatefulWidget {
 class _HospitalDetailState extends State<HospitalDetail> {
   bool isBookmarked = false;
 
-  // Medicine dummy data
-  final List<Map<String, String>> medicineList = [
-    {"name": "약품1", "status": "●"},
-    {"name": "약품2", "status": "△"},
-    {"name": "약품3", "status": "●"},
-    {"name": "약품4", "status": "△"},
-    {"name": "약품5", "status": "●"},
-    {"name": "약품6", "status": "●"},
-    {"name": "약품7", "status": "●"},
-    {"name": "약품8", "status": "●"},
-    {"name": "약품9", "status": "●"},
-    {"name": "약품10", "status": ""},
-    {"name": "약품11", "status": "●"},
-    {"name": "약품12", "status": "●"},
-    {"name": "약품13", "status": "●"},
-    {"name": "약품14", "status": "●"},
-    {"name": "약품15", "status": "●"},
-  ];
+  // Method to convert hospital's availableMedicines data to a List<Map<String, String>>
+  List<Map<String, String>> getMedicineList() {
+    return widget.hospital.availableMedicines.entries.map((entry) {
+      String statusSymbol;
+
+      switch (entry.value) {
+        case 0:
+          statusSymbol = ""; // 사용 불가
+          break;
+        case 1:
+          statusSymbol = "△"; // 조건부 사용 가능
+          break;
+        case 2:
+          statusSymbol = "●"; // 상시 사용 가능
+          break;
+        default:
+          statusSymbol = ""; // 기본적으로 빈 문자열
+      }
+
+      return {
+        "name": entry.key.name,
+        "status": statusSymbol,
+      };
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
+    // Get the medicine list based on the current hospital data
+    final List<Map<String, String>> medicineList = getMedicineList();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(''), // 타이틀은 보이지 않게 설정
