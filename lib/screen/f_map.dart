@@ -3,7 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:medy/data/hospital_dummy.dart';
 import 'package:medy/data/vo/hospital.dart';
-import 'package:medy/screen/w_hospital_detail.dart';
+import 'package:medy/screen/f_hospital_detail.dart';
 
 class MapFragment extends StatefulWidget {
   const MapFragment({super.key, required});
@@ -58,12 +58,7 @@ class _MapFragmentState extends State<MapFragment> {
                 markerId: MarkerId(place.name),
                 position: LatLng(place.latitude, place.longitude),
                 infoWindow: InfoWindow(title: place.name),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HospitalDetail()),
-                  );
-                },
+                onTap: () { },
               );
             })),
             onMapCreated: (controller) => _controller = controller,
@@ -86,12 +81,7 @@ class _MapFragmentState extends State<MapFragment> {
           Positioned(
             top: 54,
             child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HospitalDetail()));
-              },
+              onPressed: () { },
               child: Container(
                 width: MediaQuery.of(context).size.width - 21,
                 height: 44,

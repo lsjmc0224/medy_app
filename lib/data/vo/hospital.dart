@@ -5,6 +5,7 @@ class Hospital{
   final String tel;
   final double latitude;
   final double longitude;
+  final String imagePath;
 
   Hospital({
     required this.id,
@@ -13,5 +14,6 @@ class Hospital{
     required this.tel,
     required this.latitude,
     required this.longitude,
+    required this.imagePath,
   });
 }

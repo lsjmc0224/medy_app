@@ -7,6 +7,7 @@ final Hospital1 = Hospital(
   tel: "02-3473-6100",
   latitude: 37.489060,
   longitude: 127.017551,
+  imagePath: 'assets/images/hospitals/hospital1.jpeg',
 );
 final Hospital2 = Hospital(
   id: 2,
@@ -15,6 +16,7 @@ final Hospital2 = Hospital(
   tel: "02-958-8114",
   latitude: 37.594017,
   longitude: 127.051290,
+  imagePath: 'assets/images/hospitals/hospital2.jpeg',
 );
 final Hospital3 = Hospital(
   id: 3,
@@ -23,6 +25,7 @@ final Hospital3 = Hospital(
   tel: "1577-5800",
   latitude: 37.553332,
   longitude: 127.157407,
+  imagePath: 'assets/images/hospitals/hospital3.jpeg',
 );
 final Hospital4 = Hospital(
   id: 4,
@@ -31,6 +34,7 @@ final Hospital4 = Hospital(
   tel: "02-2227-0114",
   latitude: 37.562522,
   longitude: 126.940806,
+  imagePath: 'assets/images/hospitals/hospital4.jpeg',
 );
 final Hospital5 = Hospital(
   id: 5,
@@ -39,4 +43,32 @@ final Hospital5 = Hospital(
   tel: "02-2019-2114",
   latitude: 37.492626,
   longitude: 127.046560,
+  imagePath: 'assets/images/hospitals/hospital5.jpeg',
+);
+final Hospital6 = Hospital(
+  id: 1,
+  name: 'Korea Hemophilia Foundation Seoul Clinic',
+  address: "70 Saimdang-ro, Seocho-gu, Seoul",
+  tel: "02-3473-6100",
+  latitude: 37.489060,
+  longitude: 127.017551,
+  imagePath: 'assets/images/hospitals/hospital6.jpeg',
+);
+final Hospital7 = Hospital(
+  id: 1,
+  name: 'Korea Hemophilia Foundation Seoul Clinic',
+  address: "70 Saimdang-ro, Seocho-gu, Seoul",
+  tel: "02-3473-6100",
+  latitude: 37.489060,
+  longitude: 127.017551,
+  imagePath: 'assets/images/hospitals/hospital7.jpeg',
+);
+final Hospital8 = Hospital(
+  id: 1,
+  name: 'Korea Hemophilia Foundation Seoul Clinic',
+  address: "70 Saimdang-ro, Seocho-gu, Seoul",
+  tel: "02-3473-6100",
+  latitude: 37.489060,
+  longitude: 127.017551,
+  imagePath: 'assets/images/hospitals/hospital8.jpg',
 );
