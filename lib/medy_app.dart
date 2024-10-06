@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medy/screen/f_map.dart';
 import 'package:medy/screen/s_main_page.dart';
 
 class MedyApp extends StatelessWidget {

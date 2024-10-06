@@ -47,5 +47,9 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>GoogleMapKey</key>
+		<string>$(GOOGLE_MAP_KEY)</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+        <string>유저 위치를 가져와도 될까요?</string>
 	</dict>
 </plist>
