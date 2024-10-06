@@ -89,45 +89,48 @@ class _HospitalWidgetState extends State<HospitalWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // 병원 사진 (원형 이미지, 더미 데이터를 사용)
-        CircleAvatar(
-          radius: 30,
-          backgroundImage: AssetImage(widget.hospital.imagePath),
-        ),
-        const SizedBox(width: 16),
-        // 병원 정보
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.hospital.name,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                distanceInKm != null
-                    ? '현재 위치에서 ${distanceInKm!.toStringAsFixed(2)} km'
-                    : '거리를 계산 중입니다...',
-                style: const TextStyle(fontSize: 12, color: Colors.black),
-              ),
-              Text(
-                widget.hospital.tel,
-                style: const TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-              const Text(
-                '진료시간: hh:mm ~ hh:mm', // 진료시간 더미 텍스트
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 병원 사진 (원형 이미지, 더미 데이터를 사용)
+          CircleAvatar(
+            radius: 30,
+            backgroundImage: AssetImage(widget.hospital.imagePath),
           ),
-        ),
-      ],
+          const SizedBox(width: 16),
+          // 병원 정보
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.hospital.name,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  distanceInKm != null
+                      ? '현재 위치에서 ${distanceInKm!.toStringAsFixed(2)} km'
+                      : '거리를 계산 중입니다...',
+                  style: const TextStyle(fontSize: 12, color: Colors.black),
+                ),
+                Text(
+                  widget.hospital.tel,
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+                const Text(
+                  '진료시간: hh:mm ~ hh:mm', // 진료시간 더미 텍스트
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -41,57 +41,50 @@ class _HospitalListFragmentState extends State<HospitalListFragment> {
                 borderRadius: BorderRadius.vertical(
                     top: Radius.circular(24.0)), // 둥근 상단 모서리
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // 필터 버튼 행
-                    const FilterButtonRow(),
-                    const SizedBox(height: 12),
-
-                    // 병원 리스트 또는 없을 때의 메시지
-                    Expanded(
-                      child: hospitalList.isNotEmpty
-                          ? SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            ...hospitalList.map((hospital) {
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 8.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    // 병원 세부 페이지로 이동
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            HospitalDetail(hospital: hospital),
-                                      ),
-                                    );
-                                  },
-                                  child: HospitalWidget(hospital: hospital),
-                                ),
-                              );
-                            }).toList(),
-                            const SizedBox(height: 50), // 하단 여유 공간 추가
-                          ],
-                        ),
-                      )
-                          : Center(
-                        child: Text(
-                          '근처에 해당 의약품이 있는 병원이 없습니다.',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey.shade600,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // 필터 버튼 행
+                  const FilterButtonRow(),
+                  // 병원 리스트 또는 없을 때의 메시지
+                  Expanded(
+                    child: hospitalList.isNotEmpty
+                        ? SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                ...hospitalList.map((hospital) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      // 병원 세부 페이지로 이동
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              HospitalDetail(
+                                                  hospital: hospital),
+                                        ),
+                                      );
+                                    },
+                                    child:
+                                        HospitalWidget(hospital: hospital),
+                                  );
+                                }).toList(),
+                                const SizedBox(height: 50), // 하단 여유 공간 추가
+                              ],
+                            ),
+                          )
+                        : Center(
+                            child: Text(
+                              '근처에 해당 의약품이 있는 병원이 없습니다.',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey.shade600,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

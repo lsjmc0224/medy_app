@@ -7,30 +7,33 @@ class FilterButtonRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        FilterButton(
-          label: '가까운 순',
-          onTap: () {
-            // 가까운 순 필터링 이벤트
-          },
-        ),
-        const SizedBox(width: 12), // 버튼 간의 간격을 12pt로 설정
-        FilterButton(
-          label: '지역',
-          onTap: () {
-            // 지역 필터링 이벤트
-          },
-        ),
-        const SizedBox(width: 12), // 버튼 간의 간격을 12pt로 설정
-        FilterButton(
-          label: '의약품명',
-          onTap: () {
-            // 의약품명 필터링 이벤트
-          },
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          FilterButton(
+            label: '가까운 순',
+            onTap: () {
+              // 가까운 순 필터링 이벤트
+            },
+          ),
+          const SizedBox(width: 12), // 버튼 간의 간격을 12pt로 설정
+          FilterButton(
+            label: '지역',
+            onTap: () {
+              // 지역 필터링 이벤트
+            },
+          ),
+          const SizedBox(width: 12), // 버튼 간의 간격을 12pt로 설정
+          FilterButton(
+            label: '의약품명',
+            onTap: () {
+              // 의약품명 필터링 이벤트
+            },
+          ),
+        ],
+      ),
     );
   }
 }
