@@ -15,6 +15,7 @@ class HomeFragment extends StatefulWidget {
 class _HomeFragmentState extends State<HomeFragment> {
   late DateTime lastMedTime;
   late List<DateTime> allMedDates;
+  bool isLastMedDayActivated = false; // LastMedDay 활성화 여부
 
   @override
   void initState() {
@@ -24,8 +25,25 @@ class _HomeFragmentState extends State<HomeFragment> {
 
   Future<void> _fetchData() async {
     setState(() {
-      lastMedTime = DateTime.now().subtract(const Duration(hours: 3, minutes: 30));
-      allMedDates = List.generate(10, (index) => DateTime.now().subtract(Duration(days: index * 2)));
+      allMedDates = List.generate(10, (index) => DateTime.now().subtract(Duration(days: (index + 1) * 2)));
+      lastMedTime = allMedDates.first; // allMedDates의 마지막 요소를 lastMedTime으로 설정
+    });
+  }
+
+  void _toggleLastMedDay() {
+    setState(() {
+      if (isLastMedDayActivated) {
+        // LastMedDay가 비활성화된 상태에서 눌렀을 때
+        lastMedTime = DateTime.now().subtract(Duration(days: 2)); // lastMedTime을 0으로 초기화
+        if (allMedDates.isNotEmpty) {
+          allMedDates.removeLast(); // allMedDates의 마지막 요소 삭제
+        }
+      } else {
+        // LastMedDay가 활성화된 상태에서 눌렀을 때
+        lastMedTime = DateTime.now(); // lastMedTime을 현재 시간으로 설정
+        allMedDates.add(lastMedTime); // allMedDates에 현재 시간 추가
+      }
+      isLastMedDayActivated = !isLastMedDayActivated; // 활성화 상태 토글
     });
   }
 
@@ -53,14 +71,12 @@ class _HomeFragmentState extends State<HomeFragment> {
                     TimeSpent(lastMedTime: lastMedTime), // 경과시간 위젯
                     const SizedBox(height: 16),
                     LastMedDay(
-                      medName: "약 이름",
+                      medName: "애드베이트",
                       medDay: lastMedTime,
-                      onTap: () {
-                        // 탭 이벤트 처리
-                      },
+                      onTap: _toggleLastMedDay, // 탭 이벤트 처리 메서드 호출
                     ),
                     const SizedBox(height: 16),
-                    MainCalendar(markedDates: allMedDates) // 달력 위젯
+                    MainCalendar(markedDates: allMedDates), // 달력 위젯
                   ],
                 ),
               ),

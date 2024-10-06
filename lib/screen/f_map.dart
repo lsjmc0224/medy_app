@@ -6,7 +6,7 @@ import 'package:medy/data/vo/hospital.dart';
 import 'package:medy/screen/f_hospital_detail.dart';
 
 class MapFragment extends StatefulWidget {
-  const MapFragment({super.key, required});
+  const MapFragment({super.key});
 
   @override
   State<MapFragment> createState() => _MapFragmentState();
@@ -15,6 +15,16 @@ class MapFragment extends StatefulWidget {
 class _MapFragmentState extends State<MapFragment> {
   late GoogleMapController _controller;
   bool _myLocationEnabled = false;
+  CameraPosition _initialCameraPosition = CameraPosition(
+    target: LatLng(37.532600, 127.024612), // 서울 시청 위치
+    zoom: 18,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentLocation();
+  }
 
   @override
   void dispose() {
@@ -23,15 +33,23 @@ class _MapFragmentState extends State<MapFragment> {
   }
 
   Future<void> _getCurrentLocation() async {
-    final position = await Geolocator.getCurrentPosition();
-    final cameraPosition = CameraPosition(
-      target: LatLng(position.latitude, position.longitude),
-      zoom: 18,
-    );
-    _controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-    setState(() {
-      _myLocationEnabled = true;
-    });
+    try {
+      final position = await Geolocator.getCurrentPosition();
+      final cameraPosition = CameraPosition(
+        target: LatLng(position.latitude, position.longitude),
+        zoom: 18,
+      );
+      setState(() {
+        _initialCameraPosition = cameraPosition;
+        _myLocationEnabled = true;
+      });
+      if (_controller != null) {
+        _controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+      }
+    } catch (e) {
+      // 위치를 가져오지 못했을 경우 기본 설정 유지
+      print("Error fetching location: $e");
+    }
   }
 
   @override
@@ -41,16 +59,25 @@ class _MapFragmentState extends State<MapFragment> {
       Hospital2,
       Hospital3,
       Hospital4,
-      Hospital5
+      Hospital5,
+      Hospital6,
+      Hospital7,
+      Hospital8,
+      Hospital9,
+      Hospital10,
+      Hospital11,
+      Hospital12,
+      Hospital13,
+      Hospital14,
+      Hospital15,
+      Hospital16,
+      Hospital17,
     ];
     return Scaffold(
       body: Stack(
         children: [
           GoogleMap(
-            initialCameraPosition: CameraPosition(
-              target: LatLng(37.532600, 127.024612), // 서울 시청 위치
-              zoom: 18,
-            ),
+            initialCameraPosition: _initialCameraPosition,
             myLocationEnabled: _myLocationEnabled,
             myLocationButtonEnabled: false,
             markers: Set<Marker>.of(places.map((place) {
@@ -58,7 +85,15 @@ class _MapFragmentState extends State<MapFragment> {
                 markerId: MarkerId(place.name),
                 position: LatLng(place.latitude, place.longitude),
                 infoWindow: InfoWindow(title: place.name),
-                onTap: () { },
+                onTap: () {
+                  // 병원 세부 페이지로 이동
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HospitalDetail(hospital: place),
+                    ),
+                  );
+                },
               );
             })),
             onMapCreated: (controller) => _controller = controller,
@@ -71,28 +106,35 @@ class _MapFragmentState extends State<MapFragment> {
               foregroundColor: Colors.black,
               backgroundColor: Colors.white,
               elevation: 8,
-              // 그림자 크기
-              child: Icon(Icons.my_location),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10), // 버튼 모서리 둥글기
               ),
+              child: const Icon(Icons.my_location),
             ),
           ),
           Positioned(
             top: 54,
+            left: 10,
+            right: 10,
             child: ElevatedButton(
-              onPressed: () { },
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
               child: Container(
-                width: MediaQuery.of(context).size.width - 21,
+                width: double.infinity,
                 height: 44,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0),
-                      child: Text(
+                      child: const Text(
                         '위치 검색',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                           color: Colors.grey,
@@ -105,9 +147,6 @@ class _MapFragmentState extends State<MapFragment> {
                     ),
                   ],
                 ),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(8))),
               ),
             ),
           ),

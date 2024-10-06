@@ -11,22 +11,40 @@ class TimeSpent extends StatefulWidget {
 }
 
 class _TimeSpentState extends State<TimeSpent> {
-  late Timer _timer;
+  Timer? _timer;
   late String _timeSpentText;
 
   @override
   void initState() {
     super.initState();
     _updateTimeSpent();
+    _startTimer();
+  }
+
+  @override
+  void didUpdateWidget(covariant TimeSpent oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.lastMedTime != oldWidget.lastMedTime) {
+      _updateTimeSpent();
+      _restartTimer();
+    }
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void _startTimer() {
     _timer = Timer.periodic(const Duration(minutes: 1), (timer) {
       _updateTimeSpent();
     });
   }
 
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
+  void _restartTimer() {
+    _timer?.cancel();
+    _startTimer();
   }
 
   void _updateTimeSpent() {
@@ -36,13 +54,17 @@ class _TimeSpentState extends State<TimeSpent> {
         int days = difference.inDays;
         int hours = difference.inHours % 24;
         _timeSpentText = '$days일 $hours시간 지났습니다';
-      } else {
+      } else if (difference.inHours >= 1) {
         int hours = difference.inHours;
         int minutes = difference.inMinutes % 60;
         _timeSpentText = '$hours시간 $minutes분 지났습니다';
+      } else {
+        int minutes = difference.inMinutes;
+        _timeSpentText = '$minutes분 지났습니다';
       }
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
